@@ -1,4 +1,4 @@
-# INCY on macOS: 35 services via VPN, everything else — direct
+# INCY on macOS: 43 services + the RKN registry via VPN, everything else — direct
 
 > 🇷🇺 **Russian version:** [README.md](README.md)
 
@@ -14,13 +14,11 @@ The author is aware that the legislation of the Russian Federation regulates the
 
 The author **does not call for circumventing blocks** established in accordance with the legislation of the Russian Federation. Use of this material is at the reader's own discretion and risk, in accordance with the current legislation of the Russian Federation. As of the date of publication, the mere fact of using a VPN by an individual is not subject to administrative liability under the Code of Administrative Offences. This text is not legal advice; for an up-to-date opinion, consult a lawyer.
 
-<p align="center">
-  <img src="incy-routing-macos-qr.png" width="360" alt="QR — import the «Socials via VPN · macOS» routing profile">
-</p>
+**On a Mac the profile is installed by link** (see [Step 3](#step-3-add-the-routing-profile-key-step)): open it in Safari and macOS will offer to open INCY.
 
-**On a Mac the profile is installed by link** (see [Step 3](#step-3-add-the-routing-profile-key-step)): open it in Safari and macOS will offer to open INCY. The QR is there for importing from another device.
+> 📎 **This repository has no QR code.** With 61 rules the link is 2916 characters against the QR limit of 2953 — right at the edge. A QR without headroom is pointless: the next edit would break it, so the single source is [`incy-routing-macos-link.txt`](incy-routing-macos-link.txt) and the link below.
 
-> **v1** · sha256 `incy-routing-macos.json`: `63b1b666147399081442d2d341ecf460771a944f1ca97e0da1a84e50a47e7a0d` — if the file's hash doesn't match, the link and QR were built from a different profile version.
+> **v2** · sha256 `incy-routing-macos.json`: `ba8610e738da5010f200e8cd093b42aa6cf81f5bc8f1e61d11edc9848fdc36c6` — if the file's hash doesn't match, the link and QR were built from a different profile version.
 
 ## ⚠️ The main difference from iPhone: connection mode
 
@@ -40,9 +38,11 @@ TUN on macOS runs through a system extension: macOS asks for permission the firs
 It is built from the same core as the [iPhone version](https://github.com/IntruderHere/INCY-App-routing-on-iPhone) (v9): same 34 services, same full Telegram subnet list, same DNS. Only the desktop deltas differ:
 
 - **`Name` = "Socials via VPN · macOS"** so the profiles don't get mixed up between devices;
-- **`geosite:github`** added (64 domains: github.com, raw.githubusercontent.com, ghcr.io, codeload…) — more relevant on a Mac than on a phone. Remove it with one line;
+- **`geosite:github` added** (64 domains: github.com, raw.githubusercontent.com, ghcr.io, codeload…) — more relevant on a Mac than on a phone;
+- **blocked-in-Russia coverage added**: the whole RKN registry in one line, `geosite:blocked-in-ru` (~75 700 domains), plus eight services explicitly — see [the section below](#what-was-added-in-v2-blocked-in-russia);
+- **`Geositeurl` is set** — the geo file comes from the updated XTLS/Xray-rules-dat set (7.8 MB), because the preinstalled file has no `blocked-in-ru` category;
 - **no `UseChunkFiles`** — geo-file trimming doesn't work on desktop (INCY docs: `useChunkFiles` is implemented for Android/iOS only), so the field is pointless here;
-- everything else is byte-for-byte identical to the iPhone profile.
+- everything else is as on iPhone (same 34 services, same Telegram subnets, same DNS).
 
 > ⚠️ **The desktop client is pre-alpha** — that is INCY-DEV's own wording. Usable day to day, but breaking changes between releases are expected. The App Store build (the same app as on iPhone) is not subject to that warning.
 
@@ -70,14 +70,10 @@ INCY does not provide servers — you need your own subscription (VLESS, VMess, 
 3. macOS offers to open INCY → confirm. The profile is added and **activated immediately**.
 
 ```
-incy://routing/onadd/eyJOYW1lIjoiU29jaWFscyB2aWEgVlBOIMK3IG1hY09TIiwiR2xvYmFsUHJveHkiOiJmYWxzZSIsIlJlbW90ZUROU1R5cGUiOiJEb0giLCJSZW1vdGVETlNEb21haW4iOiJodHRwczovL2Nsb3VkZmxhcmUtZG5zLmNvbS9kbnMtcXVlcnkiLCJSZW1vdGVETlNJUCI6IjEuMS4xLjEiLCJEb21lc3RpY0ROU1R5cGUiOiJEb1UiLCJEb21lc3RpY0ROU0RvbWFpbiI6IiIsIkRvbWVzdGljRE5TSVAiOiI3Ny44OC44LjgiLCJEbnNIb3N0cyI6eyJjbG91ZGZsYXJlLWRucy5jb20iOiIxLjEuMS4xIn0sIkZha2VETlMiOiJmYWxzZSIsIkRvbWFpblN0cmF0ZWd5IjoiSVBJZk5vbk1hdGNoIiwiTGFzdFVwZGF0ZWQiOiIxNzk0NjcyMDAwIiwiRGlyZWN0U2l0ZXMiOlsiZ2Vvc2l0ZTpwcml2YXRlIl0sIkRpcmVjdElwIjpbImdlb2lwOnByaXZhdGUiLCIxMC4wLjAuMC84IiwiMTcyLjE2LjAuMC8xMiIsIjE5Mi4xNjguMC4wLzE2IiwiMTY5LjI1NC4wLjAvMTYiLCIyMjQuMC4wLjAvNCIsIjI1NS4yNTUuMjU1LjI1NSJdLCJQcm94eVNpdGVzIjpbImdlb3NpdGU6dGVsZWdyYW0iLCJkb21haW46eW91dHViZS5jb20iLCJkb21haW46eW91dHUuYmUiLCJkb21haW46eXQuYmUiLCJkb21haW46Z29vZ2xldmlkZW8uY29tIiwiZG9tYWluOnl0aW1nLmNvbSIsImRvbWFpbjpnZ3BodC5jb20iLCJkb21haW46eW91dHViZS1ub2Nvb2tpZS5jb20iLCJkb21haW46eW91dHViZWkuZ29vZ2xlYXBpcy5jb20iLCJkb21haW46eW91dHViZS5nb29nbGVhcGlzLmNvbSIsImdlb3NpdGU6aW5zdGFncmFtIiwiZ2Vvc2l0ZTpkaXNjb3JkIiwiZ2Vvc2l0ZTp3aGF0c2FwcCIsImdlb3NpdGU6dHdpdHRlciIsImdlb3NpdGU6ZmFjZWJvb2siLCJnZW9zaXRlOm1lc3NlbmdlciIsImdlb3NpdGU6c2lnbmFsIiwiZG9tYWluOnRleHRzZWN1cmUuY29tIiwiZ2Vvc2l0ZTpsaW5rZWRpbiIsImRvbWFpbjpzbmFwY2hhdC5jb20iLCJkb21haW46c25hcC5jb20iLCJkb21haW46c2MtY2RuLm5ldCIsImRvbWFpbjpmYWNldGltZS5hcHBsZS5jb20iLCJkb21haW46ZnRhcGkuaXR1bmVzLmFwcGxlLmNvbSIsImRvbWFpbjpwdXNoLmFwcGxlLmNvbSIsImRvbWFpbjplc3MuYXBwbGUuY29tIiwiZ2Vvc2l0ZTp2aWJlciIsImdlb3NpdGU6bmV0ZmxpeCIsImdlb3NpdGU6c3BvdGlmeSIsImdlb3NpdGU6c3RlYW0iLCJnZW9zaXRlOm9wZW5haSIsImRvbWFpbjpnZW1pbmkuZ29vZ2xlLmNvbSIsImdlb3NpdGU6YW50aHJvcGljIiwiZG9tYWluOm1pZGpvdXJuZXkuY29tIiwiZG9tYWluOmRlZXBsLmNvbSIsImdlb3NpdGU6Y2FudmEiLCJnZW9zaXRlOm5vdGlvbiIsImRvbWFpbjptaXJvLmNvbSIsImdlb3NpdGU6cGxheXN0YXRpb24iLCJnZW9zaXRlOm5pbnRlbmRvIiwiZ2Vvc2l0ZTpibGl6emFyZCIsImdlb3NpdGU6ZGlzbmV5IiwiZ2Vvc2l0ZTpjb3Vyc2VyYSIsImdlb3NpdGU6YWlyYm5iIiwiZ2Vvc2l0ZTpib29raW5nIiwiZG9tYWluOnBhcmFtb3VudHBsdXMuY29tIiwiZG9tYWluOnBhcmFtb3VudC5jb20iLCJkb21haW46dW5pdmVyc2FscGx1cy5jb20iLCJkb21haW46dW5pdmVyc2FsLXBsdXMuZnIiLCJnZW9zaXRlOnViaXNvZnQiLCJnZW9zaXRlOmVhIiwiZ2Vvc2l0ZTpnaXRodWIiXSwiUHJveHlJcCI6WyI5MS4xMDguNC4wLzIyIiwiOTEuMTA4LjguMC8yMiIsIjkxLjEwOC4xMi4wLzIyIiwiOTEuMTA4LjE2LjAvMjIiLCI5MS4xMDguMjAuMC8yMiIsIjkxLjEwOC41Ni4wLzIyIiwiOTEuMTA1LjE5Mi4wLzIzIiwiMTQ5LjE1NC4xNjAuMC8yMCIsIjE4NS43Ni4xNTEuMC8yNCIsIjk1LjE2MS42NC4wLzIwIiwiMjAwMTo2N2M6NGU4OjovNDgiLCIyMDAxOmIyODpmMjNjOjovNDgiLCIyMDAxOmIyODpmMjNkOjovNDgiLCIyMDAxOmIyODpmMjNmOjovNDgiLCIyYTBhOmYyODA6Oi8zMiJdLCJCbG9ja1NpdGVzIjpbXSwiQmxvY2tJcCI6W119
+incy://routing/onadd/eyJOYW1lIjoiU29jaWFscyB2aWEgVlBOIMK3IG1hY09TIiwiR2xvYmFsUHJveHkiOiJmYWxzZSIsIlJlbW90ZUROU1R5cGUiOiJEb0giLCJSZW1vdGVETlNEb21haW4iOiJodHRwczovL2Nsb3VkZmxhcmUtZG5zLmNvbS9kbnMtcXVlcnkiLCJSZW1vdGVETlNJUCI6IjEuMS4xLjEiLCJEb21lc3RpY0ROU1R5cGUiOiJEb1UiLCJEb21lc3RpY0ROU0RvbWFpbiI6IiIsIkRvbWVzdGljRE5TSVAiOiI3Ny44OC44LjgiLCJEbnNIb3N0cyI6eyJjbG91ZGZsYXJlLWRucy5jb20iOiIxLjEuMS4xIn0sIkdlb3NpdGV1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vWFRMUy9YcmF5LXJ1bGVzLWRhdC9yZWxlYXNlcy9sYXRlc3QvZG93bmxvYWQvZ2Vvc2l0ZS5kYXQiLCJGYWtlRE5TIjoiZmFsc2UiLCJEb21haW5TdHJhdGVneSI6IklQSWZOb25NYXRjaCIsIkxhc3RVcGRhdGVkIjoiMTc5NDY3MzgwMCIsIkRpcmVjdFNpdGVzIjpbImdlb3NpdGU6cHJpdmF0ZSJdLCJEaXJlY3RJcCI6WyJnZW9pcDpwcml2YXRlIiwiMTAuMC4wLjAvOCIsIjE3Mi4xNi4wLjAvMTIiLCIxOTIuMTY4LjAuMC8xNiIsIjE2OS4yNTQuMC4wLzE2IiwiMjI0LjAuMC4wLzQiLCIyNTUuMjU1LjI1NS4yNTUiXSwiUHJveHlTaXRlcyI6WyJnZW9zaXRlOnRlbGVncmFtIiwiZG9tYWluOnlvdXR1YmUuY29tIiwiZG9tYWluOnlvdXR1LmJlIiwiZG9tYWluOnl0LmJlIiwiZG9tYWluOmdvb2dsZXZpZGVvLmNvbSIsImRvbWFpbjp5dGltZy5jb20iLCJkb21haW46Z2dwaHQuY29tIiwiZG9tYWluOnlvdXR1YmUtbm9jb29raWUuY29tIiwiZG9tYWluOnlvdXR1YmVpLmdvb2dsZWFwaXMuY29tIiwiZG9tYWluOnlvdXR1YmUuZ29vZ2xlYXBpcy5jb20iLCJnZW9zaXRlOmluc3RhZ3JhbSIsImdlb3NpdGU6ZGlzY29yZCIsImdlb3NpdGU6d2hhdHNhcHAiLCJnZW9zaXRlOnR3aXR0ZXIiLCJnZW9zaXRlOmZhY2Vib29rIiwiZ2Vvc2l0ZTptZXNzZW5nZXIiLCJnZW9zaXRlOnNpZ25hbCIsImRvbWFpbjp0ZXh0c2VjdXJlLmNvbSIsImdlb3NpdGU6bGlua2VkaW4iLCJkb21haW46c25hcGNoYXQuY29tIiwiZG9tYWluOnNuYXAuY29tIiwiZG9tYWluOnNjLWNkbi5uZXQiLCJkb21haW46ZmFjZXRpbWUuYXBwbGUuY29tIiwiZG9tYWluOmZ0YXBpLml0dW5lcy5hcHBsZS5jb20iLCJkb21haW46cHVzaC5hcHBsZS5jb20iLCJkb21haW46ZXNzLmFwcGxlLmNvbSIsImdlb3NpdGU6dmliZXIiLCJnZW9zaXRlOm5ldGZsaXgiLCJnZW9zaXRlOnNwb3RpZnkiLCJnZW9zaXRlOnN0ZWFtIiwiZ2Vvc2l0ZTpvcGVuYWkiLCJkb21haW46Z2VtaW5pLmdvb2dsZS5jb20iLCJnZW9zaXRlOmFudGhyb3BpYyIsImRvbWFpbjptaWRqb3VybmV5LmNvbSIsImRvbWFpbjpkZWVwbC5jb20iLCJnZW9zaXRlOmNhbnZhIiwiZ2Vvc2l0ZTpub3Rpb24iLCJkb21haW46bWlyby5jb20iLCJnZW9zaXRlOnBsYXlzdGF0aW9uIiwiZ2Vvc2l0ZTpuaW50ZW5kbyIsImdlb3NpdGU6YmxpenphcmQiLCJnZW9zaXRlOmRpc25leSIsImdlb3NpdGU6Y291cnNlcmEiLCJnZW9zaXRlOmFpcmJuYiIsImdlb3NpdGU6Ym9va2luZyIsImRvbWFpbjpwYXJhbW91bnRwbHVzLmNvbSIsImRvbWFpbjpwYXJhbW91bnQuY29tIiwiZG9tYWluOnVuaXZlcnNhbHBsdXMuY29tIiwiZG9tYWluOnVuaXZlcnNhbC1wbHVzLmZyIiwiZ2Vvc2l0ZTp1Ymlzb2Z0IiwiZ2Vvc2l0ZTplYSIsImdlb3NpdGU6Z2l0aHViIiwiZ2Vvc2l0ZTpibG9ja2VkLWluLXJ1IiwiZ2Vvc2l0ZTpyb2Jsb3giLCJnZW9zaXRlOnJ1dHJhY2tlciIsImdlb3NpdGU6cHJvdG9ubWFpbCIsImdlb3NpdGU6c291bmRjbG91ZCIsImdlb3NpdGU6dGlrdG9rIiwiZ2Vvc2l0ZTpmaWdtYSIsImdlb3NpdGU6ZWJheSIsImdlb3NpdGU6c3BlZWR0ZXN0Il0sIlByb3h5SXAiOlsiOTEuMTA4LjQuMC8yMiIsIjkxLjEwOC44LjAvMjIiLCI5MS4xMDguMTIuMC8yMiIsIjkxLjEwOC4xNi4wLzIyIiwiOTEuMTA4LjIwLjAvMjIiLCI5MS4xMDguNTYuMC8yMiIsIjkxLjEwNS4xOTIuMC8yMyIsIjE0OS4xNTQuMTYwLjAvMjAiLCIxODUuNzYuMTUxLjAvMjQiLCI5NS4xNjEuNjQuMC8yMCIsIjIwMDE6NjdjOjRlODo6LzQ4IiwiMjAwMTpiMjg6ZjIzYzo6LzQ4IiwiMjAwMTpiMjg6ZjIzZDo6LzQ4IiwiMjAwMTpiMjg6ZjIzZjo6LzQ4IiwiMmEwYTpmMjgwOjovMzIiXSwiQmxvY2tTaXRlcyI6W10sIkJsb2NrSXAiOltdfQ==
 ```
 
-### Option B — via QR code
-
-The QR is at the top of this guide (or in `incy-routing-macos-qr.png`): INCY → QR scanning → point at it. Handy when the profile is being installed on a different Mac than the one showing this file.
-
-### Option C — via clipboard
+### Option B — via clipboard
 
 Copy the base64 part after `incy://routing/onadd/` → in INCY add a routing profile from the clipboard.
 
@@ -91,7 +87,7 @@ Copy the base64 part after `incy://routing/onadd/` → in INCY add a routing pro
 4. Check services: Telegram, Instagram (web), YouTube, Discord, X, ChatGPT work; your bank, government portals and Yandex stay direct, as usual.
 5. If **iCloud Private Relay** is on, turn it off while testing: it intercepts Safari traffic and makes the result unreadable.
 
-## What the profile covers (35 services)
+## What the profile covers (43 services + the RKN registry)
 
 | Category | Services |
 |---|---|
@@ -103,10 +99,35 @@ Copy the base64 part after `incy://routing/onadd/` → in INCY add a routing pro
 | AI & work | OpenAI, Gemini, Anthropic, Midjourney, DeepL, Canva, Notion, Miro, Coursera |
 | Travel & streaming | Airbnb, Booking, Paramount+, Universal+ |
 | Desktop add-on | **GitHub** (`geosite:github`: github.com, raw.githubusercontent.com, ghcr.io, codeload…) |
+| Blocked in Russia | **RKN registry** (`geosite:blocked-in-ru`, ~75 700 domains), Roblox, Rutracker, ProtonMail, SoundCloud, TikTok, Figma, eBay, Speedtest — see [the section below](#what-was-added-in-v2-blocked-in-russia) |
 
 Anything that matches no rule goes **direct** (`GlobalProxy: false`).
 
 **IP rules (`ProxyIp`) — Telegram only:** the full official subnet list ([core.telegram.org/resources/cidr.txt](https://core.telegram.org/resources/cidr.txt)) — 10 IPv4 and 5 IPv6 entries. Telegram (and its calls) is addressed by IP, not by domain, so without these there is neither sync nor voice.
+
+## What was added in v2: blocked in Russia
+
+A single line, `geosite:blocked-in-ru`, covers **the whole RKN registry** — 75,744 domains from [antifilter.download](https://antifilter.download) and [Re:filter](https://github.com/1andrevich/Re-filter-lists), including Meta, X, Discord, Signal, Viber, Snapchat, LinkedIn, Roblox, Rutracker, TikTok, Speedtest, WhatsApp, YouTube, ProtonMail, SoundCloud and blocked media. It updates together with the geo file, so a newly blocked domain enters the route without touching the config.
+
+Added explicitly — services the registry lacks, or ones you want visible:
+
+| Service | Category | Why |
+|---|---|---|
+| Roblox | `geosite:roblox` | blocked in Russia (2025) |
+| Rutracker | `geosite:rutracker` | blocked since 2015 |
+| ProtonMail | `geosite:protonmail` | `proton.me` is in the registry |
+| SoundCloud | `geosite:soundcloud` | in the registry |
+| TikTok | `geosite:tiktok` | restricted mode since 2022 (uploads, streams, foreign content) |
+| Figma | `geosite:figma` | left Russia, accounts restricted |
+| eBay | `geosite:ebay` | left Russia |
+| Speedtest | `geosite:speedtest` | `speedtest.net` is in the registry |
+
+**Dependency.** The preinstalled geo file has no `blocked-in-ru` category, so the profile sets `Geositeurl` to [XTLS/Xray-rules-dat](https://github.com/XTLS/Xray-rules-dat/releases/latest) — 7.8 MB, downloaded once when the profile is added (then checked by hash / `LastUpdated`). If the download fails those rules simply don't apply, while the rest (Telegram, YouTube, GitHub…) keep working from the bundled file.
+
+**Deliberately not included:**
+
+- `geosite:cloudflare` — Cloudflare-hosted sites do break in Russia, but it is a CDN: the rule would push every Russian site behind Cloudflare through the VPN. Add it as one line if you need it and check the speed;
+- `geoip:blacklist-ru` — the IP list of blocked networks (requires `Geoipurl` pointing at `geoip-lite.dat`). It catches IP-level blocking, but also drags shared CDN addresses (Google, Cloudflare) into the tunnel even though they are not blocked — with `GlobalProxy: false` that is wasted loss.
 
 ## Telegram: why calls don't work
 
@@ -131,7 +152,8 @@ To tell profile from tunnel: open `incy://routing/off` (everything into the tunn
 | TUN won't start, Connect fails silently | The system extension isn't approved: System Settings → Privacy & Security → Allow, then restart INCY |
 | Telegram calls are silent while chats work | TUN + "Block UDP" off + P2P → "Never" + another node (see the section above) |
 | A blocked service loads but the IP is local | The profile isn't active or the rule didn't match: check the "Routing" section and that the profile is "Socials via VPN · macOS" |
-| The profile shows a red "!" | Geo files are downloading. On desktop they are **full** (tens of MB) and are not trimmed — wait, this is normal |
+| The profile shows a red "!" | Geo files are downloading. On desktop they are **full** and not trimmed: `geosite.dat` from the profile is 7.8 MB. Wait a minute, that is normal |
+| Blocked sites don't open while everything else works | Make sure the profile is active and the geo file finished downloading (the "Routing" section): without it `blocked-in-ru` does not apply |
 | Nothing works after a reboot | Make sure INCY runs and TUN is up; if in doubt, "Reset Kill Switch" in the settings |
 | You want "everything through VPN" | Open `incy://routing/off` (the profile is kept) |
 | You want "everything direct" with no VPN | Just disconnect in INCY |
@@ -151,9 +173,10 @@ To tell profile from tunnel: open `incy://routing/off` (everything into the tunn
  "DnsHosts": {
   "cloudflare-dns.com": "1.1.1.1"
  },
+ "Geositeurl": "https://github.com/XTLS/Xray-rules-dat/releases/latest/download/geosite.dat",
  "FakeDNS": "false",
  "DomainStrategy": "IPIfNonMatch",
- "LastUpdated": "1794672000",
+ "LastUpdated": "1794673800",
  "DirectSites": [
   "geosite:private"
  ],
@@ -218,7 +241,16 @@ To tell profile from tunnel: open `incy://routing/off` (everything into the tunn
   "domain:universal-plus.fr",
   "geosite:ubisoft",
   "geosite:ea",
-  "geosite:github"
+  "geosite:github",
+  "geosite:blocked-in-ru",
+  "geosite:roblox",
+  "geosite:rutracker",
+  "geosite:protonmail",
+  "geosite:soundcloud",
+  "geosite:tiktok",
+  "geosite:figma",
+  "geosite:ebay",
+  "geosite:speedtest"
  ],
  "ProxyIp": [
   "91.108.4.0/22",
