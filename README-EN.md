@@ -31,6 +31,8 @@ On iPhone there is only one kind of VPN. On desktop INCY has **two modes**, and 
 
 **Bottom line: use TUN with this profile.** In system-proxy mode half the rules never fire (the app simply doesn't ask the proxy) and calls can never work, no matter how good the rules are.
 
+> 🐞 **Caveat for build 3.9.1 (November 2026):** its TUN installs the interface but never opens a connection to the server — traffic enters the tunnel and dies. Verified on macOS: the process has zero TCP sessions to the server, while the same node works in xray-core 26.11.9. Until the bug is fixed, the working workaround is the "System proxy" mode (browsers work, UDP/voice do not).
+
 TUN on macOS runs through a system extension: macOS asks for permission the first time (System Settings → Privacy & Security). Without it Connect fails without a clear error.
 
 ## How this profile differs from the iPhone one
@@ -150,6 +152,7 @@ To tell profile from tunnel: open `incy://routing/off` (everything into the tunn
 |---|---|
 | Connected, but sites don't load / rules don't apply | "System proxy" mode is on: apps that don't ask the proxy bypass it. Switch to **TUN** |
 | TUN won't start, Connect fails silently | The system extension isn't approved: System Settings → Privacy & Security → Allow, then restart INCY |
+| Connect in TUN works, but nothing loads through the VPN (`utun` is up, sites hang) | Known bug in the pre-alpha 3.9.1 build: TUN installs the interface and the default route, but no TCP connection to the server is ever opened (the process has zero sessions to the server in `lsof`), while the same node works in xray-core. Workaround — **"System proxy"** mode: browsers and anything that honours the system proxy work; UDP/voice do not. Reported to [feedback.incy.cc](https://feedback.incy.cc) |
 | Telegram calls are silent while chats work | TUN + "Block UDP" off + P2P → "Never" + another node (see the section above) |
 | A blocked service loads but the IP is local | The profile isn't active or the rule didn't match: check the "Routing" section and that the profile is "Socials via VPN · macOS" |
 | The profile shows a red "!" | Geo files are downloading. On desktop they are **full** and not trimmed: `geosite.dat` from the profile is 7.8 MB. Wait a minute, that is normal |
