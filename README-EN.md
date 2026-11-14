@@ -18,7 +18,7 @@ The author **does not call for circumventing blocks** established in accordance 
 
 > 📎 **This repository has no QR code.** With 61 rules the link is 2916 characters against the QR limit of 2953 — right at the edge. A QR without headroom is pointless: the next edit would break it, so the single source is [`incy-routing-macos-link.txt`](incy-routing-macos-link.txt) and the link below.
 
-> **v2** · sha256 `incy-routing-macos.json`: `ba8610e738da5010f200e8cd093b42aa6cf81f5bc8f1e61d11edc9848fdc36c6` — if the file's hash doesn't match, the link and QR were built from a different profile version.
+> **v3** · sha256 `incy-routing-macos.json`: `8b16a23528889db67aaf634d41c30eccbe2fa018372112cad8c208df53220e14` — if the file's hash doesn't match, the link and QR were built from a different profile version.
 
 ## ⚠️ The main difference from iPhone: connection mode
 
@@ -72,7 +72,7 @@ INCY does not provide servers — you need your own subscription (VLESS, VMess, 
 3. macOS offers to open INCY → confirm. The profile is added and **activated immediately**.
 
 ```
-incy://routing/onadd/eyJOYW1lIjoiU29jaWFscyB2aWEgVlBOIMK3IG1hY09TIiwiR2xvYmFsUHJveHkiOiJmYWxzZSIsIlJlbW90ZUROU1R5cGUiOiJEb0giLCJSZW1vdGVETlNEb21haW4iOiJodHRwczovL2Nsb3VkZmxhcmUtZG5zLmNvbS9kbnMtcXVlcnkiLCJSZW1vdGVETlNJUCI6IjEuMS4xLjEiLCJEb21lc3RpY0ROU1R5cGUiOiJEb1UiLCJEb21lc3RpY0ROU0RvbWFpbiI6IiIsIkRvbWVzdGljRE5TSVAiOiI3Ny44OC44LjgiLCJEbnNIb3N0cyI6eyJjbG91ZGZsYXJlLWRucy5jb20iOiIxLjEuMS4xIn0sIkdlb3NpdGV1cmwiOiJodHRwczovL2dpdGh1Yi5jb20vWFRMUy9YcmF5LXJ1bGVzLWRhdC9yZWxlYXNlcy9sYXRlc3QvZG93bmxvYWQvZ2Vvc2l0ZS5kYXQiLCJGYWtlRE5TIjoiZmFsc2UiLCJEb21haW5TdHJhdGVneSI6IklQSWZOb25NYXRjaCIsIkxhc3RVcGRhdGVkIjoiMTc5NDY3MzgwMCIsIkRpcmVjdFNpdGVzIjpbImdlb3NpdGU6cHJpdmF0ZSJdLCJEaXJlY3RJcCI6WyJnZW9pcDpwcml2YXRlIiwiMTAuMC4wLjAvOCIsIjE3Mi4xNi4wLjAvMTIiLCIxOTIuMTY4LjAuMC8xNiIsIjE2OS4yNTQuMC4wLzE2IiwiMjI0LjAuMC4wLzQiLCIyNTUuMjU1LjI1NS4yNTUiXSwiUHJveHlTaXRlcyI6WyJnZW9zaXRlOnRlbGVncmFtIiwiZG9tYWluOnlvdXR1YmUuY29tIiwiZG9tYWluOnlvdXR1LmJlIiwiZG9tYWluOnl0LmJlIiwiZG9tYWluOmdvb2dsZXZpZGVvLmNvbSIsImRvbWFpbjp5dGltZy5jb20iLCJkb21haW46Z2dwaHQuY29tIiwiZG9tYWluOnlvdXR1YmUtbm9jb29raWUuY29tIiwiZG9tYWluOnlvdXR1YmVpLmdvb2dsZWFwaXMuY29tIiwiZG9tYWluOnlvdXR1YmUuZ29vZ2xlYXBpcy5jb20iLCJnZW9zaXRlOmluc3RhZ3JhbSIsImdlb3NpdGU6ZGlzY29yZCIsImdlb3NpdGU6d2hhdHNhcHAiLCJnZW9zaXRlOnR3aXR0ZXIiLCJnZW9zaXRlOmZhY2Vib29rIiwiZ2Vvc2l0ZTptZXNzZW5nZXIiLCJnZW9zaXRlOnNpZ25hbCIsImRvbWFpbjp0ZXh0c2VjdXJlLmNvbSIsImdlb3NpdGU6bGlua2VkaW4iLCJkb21haW46c25hcGNoYXQuY29tIiwiZG9tYWluOnNuYXAuY29tIiwiZG9tYWluOnNjLWNkbi5uZXQiLCJkb21haW46ZmFjZXRpbWUuYXBwbGUuY29tIiwiZG9tYWluOmZ0YXBpLml0dW5lcy5hcHBsZS5jb20iLCJkb21haW46cHVzaC5hcHBsZS5jb20iLCJkb21haW46ZXNzLmFwcGxlLmNvbSIsImdlb3NpdGU6dmliZXIiLCJnZW9zaXRlOm5ldGZsaXgiLCJnZW9zaXRlOnNwb3RpZnkiLCJnZW9zaXRlOnN0ZWFtIiwiZ2Vvc2l0ZTpvcGVuYWkiLCJkb21haW46Z2VtaW5pLmdvb2dsZS5jb20iLCJnZW9zaXRlOmFudGhyb3BpYyIsImRvbWFpbjptaWRqb3VybmV5LmNvbSIsImRvbWFpbjpkZWVwbC5jb20iLCJnZW9zaXRlOmNhbnZhIiwiZ2Vvc2l0ZTpub3Rpb24iLCJkb21haW46bWlyby5jb20iLCJnZW9zaXRlOnBsYXlzdGF0aW9uIiwiZ2Vvc2l0ZTpuaW50ZW5kbyIsImdlb3NpdGU6YmxpenphcmQiLCJnZW9zaXRlOmRpc25leSIsImdlb3NpdGU6Y291cnNlcmEiLCJnZW9zaXRlOmFpcmJuYiIsImdlb3NpdGU6Ym9va2luZyIsImRvbWFpbjpwYXJhbW91bnRwbHVzLmNvbSIsImRvbWFpbjpwYXJhbW91bnQuY29tIiwiZG9tYWluOnVuaXZlcnNhbHBsdXMuY29tIiwiZG9tYWluOnVuaXZlcnNhbC1wbHVzLmZyIiwiZ2Vvc2l0ZTp1Ymlzb2Z0IiwiZ2Vvc2l0ZTplYSIsImdlb3NpdGU6Z2l0aHViIiwiZ2Vvc2l0ZTpibG9ja2VkLWluLXJ1IiwiZ2Vvc2l0ZTpyb2Jsb3giLCJnZW9zaXRlOnJ1dHJhY2tlciIsImdlb3NpdGU6cHJvdG9ubWFpbCIsImdlb3NpdGU6c291bmRjbG91ZCIsImdlb3NpdGU6dGlrdG9rIiwiZ2Vvc2l0ZTpmaWdtYSIsImdlb3NpdGU6ZWJheSIsImdlb3NpdGU6c3BlZWR0ZXN0Il0sIlByb3h5SXAiOlsiOTEuMTA4LjQuMC8yMiIsIjkxLjEwOC44LjAvMjIiLCI5MS4xMDguMTIuMC8yMiIsIjkxLjEwOC4xNi4wLzIyIiwiOTEuMTA4LjIwLjAvMjIiLCI5MS4xMDguNTYuMC8yMiIsIjkxLjEwNS4xOTIuMC8yMyIsIjE0OS4xNTQuMTYwLjAvMjAiLCIxODUuNzYuMTUxLjAvMjQiLCI5NS4xNjEuNjQuMC8yMCIsIjIwMDE6NjdjOjRlODo6LzQ4IiwiMjAwMTpiMjg6ZjIzYzo6LzQ4IiwiMjAwMTpiMjg6ZjIzZDo6LzQ4IiwiMjAwMTpiMjg6ZjIzZjo6LzQ4IiwiMmEwYTpmMjgwOjovMzIiXSwiQmxvY2tTaXRlcyI6W10sIkJsb2NrSXAiOltdfQ==
+incy://routing/onadd/eyJOYW1lIjoiU29jaWFscyB2aWEgVlBOIMK3IG1hY09TIiwiR2xvYmFsUHJveHkiOiJmYWxzZSIsIlJlbW90ZUROU1R5cGUiOiJEb0giLCJSZW1vdGVETlNEb21haW4iOiJodHRwczovL2Nsb3VkZmxhcmUtZG5zLmNvbS9kbnMtcXVlcnkiLCJSZW1vdGVETlNJUCI6IjEuMS4xLjEiLCJEb21lc3RpY0ROU1R5cGUiOiJEb1UiLCJEb21lc3RpY0ROU0RvbWFpbiI6IiIsIkRvbWVzdGljRE5TSVAiOiI4LjguOC44IiwiRG5zSG9zdHMiOnsiY2xvdWRmbGFyZS1kbnMuY29tIjoiMS4xLjEuMSJ9LCJHZW9zaXRldXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL1hUTFMvWHJheS1ydWxlcy1kYXQvcmVsZWFzZXMvbGF0ZXN0L2Rvd25sb2FkL2dlb3NpdGUuZGF0IiwiRmFrZUROUyI6InRydWUiLCJEb21haW5TdHJhdGVneSI6IklQSWZOb25NYXRjaCIsIkxhc3RVcGRhdGVkIjoiMTc5NDY3NjgwMCIsIkRpcmVjdFNpdGVzIjpbImdlb3NpdGU6cHJpdmF0ZSJdLCJEaXJlY3RJcCI6WyJnZW9pcDpwcml2YXRlIiwiMTAuMC4wLjAvOCIsIjE3Mi4xNi4wLjAvMTIiLCIxOTIuMTY4LjAuMC8xNiIsIjE2OS4yNTQuMC4wLzE2IiwiMjI0LjAuMC4wLzQiLCIyNTUuMjU1LjI1NS4yNTUiXSwiUHJveHlTaXRlcyI6WyJnZW9zaXRlOnRlbGVncmFtIiwiZG9tYWluOnlvdXR1YmUuY29tIiwiZG9tYWluOnlvdXR1LmJlIiwiZG9tYWluOnl0LmJlIiwiZG9tYWluOmdvb2dsZXZpZGVvLmNvbSIsImRvbWFpbjp5dGltZy5jb20iLCJkb21haW46Z2dwaHQuY29tIiwiZG9tYWluOnlvdXR1YmUtbm9jb29raWUuY29tIiwiZG9tYWluOnlvdXR1YmVpLmdvb2dsZWFwaXMuY29tIiwiZG9tYWluOnlvdXR1YmUuZ29vZ2xlYXBpcy5jb20iLCJnZW9zaXRlOmluc3RhZ3JhbSIsImdlb3NpdGU6ZGlzY29yZCIsImdlb3NpdGU6d2hhdHNhcHAiLCJnZW9zaXRlOnR3aXR0ZXIiLCJnZW9zaXRlOmZhY2Vib29rIiwiZ2Vvc2l0ZTptZXNzZW5nZXIiLCJnZW9zaXRlOnNpZ25hbCIsImRvbWFpbjp0ZXh0c2VjdXJlLmNvbSIsImdlb3NpdGU6bGlua2VkaW4iLCJkb21haW46c25hcGNoYXQuY29tIiwiZG9tYWluOnNuYXAuY29tIiwiZG9tYWluOnNjLWNkbi5uZXQiLCJkb21haW46ZmFjZXRpbWUuYXBwbGUuY29tIiwiZG9tYWluOmZ0YXBpLml0dW5lcy5hcHBsZS5jb20iLCJkb21haW46cHVzaC5hcHBsZS5jb20iLCJkb21haW46ZXNzLmFwcGxlLmNvbSIsImdlb3NpdGU6dmliZXIiLCJnZW9zaXRlOm5ldGZsaXgiLCJnZW9zaXRlOnNwb3RpZnkiLCJnZW9zaXRlOnN0ZWFtIiwiZ2Vvc2l0ZTpvcGVuYWkiLCJkb21haW46Z2VtaW5pLmdvb2dsZS5jb20iLCJnZW9zaXRlOmFudGhyb3BpYyIsImRvbWFpbjptaWRqb3VybmV5LmNvbSIsImRvbWFpbjpkZWVwbC5jb20iLCJnZW9zaXRlOmNhbnZhIiwiZ2Vvc2l0ZTpub3Rpb24iLCJkb21haW46bWlyby5jb20iLCJnZW9zaXRlOnBsYXlzdGF0aW9uIiwiZ2Vvc2l0ZTpuaW50ZW5kbyIsImdlb3NpdGU6YmxpenphcmQiLCJnZW9zaXRlOmRpc25leSIsImdlb3NpdGU6Y291cnNlcmEiLCJnZW9zaXRlOmFpcmJuYiIsImdlb3NpdGU6Ym9va2luZyIsImRvbWFpbjpwYXJhbW91bnRwbHVzLmNvbSIsImRvbWFpbjpwYXJhbW91bnQuY29tIiwiZG9tYWluOnVuaXZlcnNhbHBsdXMuY29tIiwiZG9tYWluOnVuaXZlcnNhbC1wbHVzLmZyIiwiZ2Vvc2l0ZTp1Ymlzb2Z0IiwiZ2Vvc2l0ZTplYSIsImdlb3NpdGU6Z2l0aHViIiwiZ2Vvc2l0ZTpibG9ja2VkLWluLXJ1IiwiZ2Vvc2l0ZTpyb2Jsb3giLCJnZW9zaXRlOnJ1dHJhY2tlciIsImdlb3NpdGU6cHJvdG9ubWFpbCIsImdlb3NpdGU6c291bmRjbG91ZCIsImdlb3NpdGU6dGlrdG9rIiwiZ2Vvc2l0ZTpmaWdtYSIsImdlb3NpdGU6ZWJheSIsImdlb3NpdGU6c3BlZWR0ZXN0Il0sIlByb3h5SXAiOlsiOTEuMTA4LjQuMC8yMiIsIjkxLjEwOC44LjAvMjIiLCI5MS4xMDguMTIuMC8yMiIsIjkxLjEwOC4xNi4wLzIyIiwiOTEuMTA4LjIwLjAvMjIiLCI5MS4xMDguNTYuMC8yMiIsIjkxLjEwNS4xOTIuMC8yMyIsIjE0OS4xNTQuMTYwLjAvMjAiLCIxODUuNzYuMTUxLjAvMjQiLCI5NS4xNjEuNjQuMC8yMCIsIjIwMDE6NjdjOjRlODo6LzQ4IiwiMjAwMTpiMjg6ZjIzYzo6LzQ4IiwiMjAwMTpiMjg6ZjIzZDo6LzQ4IiwiMjAwMTpiMjg6ZjIzZjo6LzQ4IiwiMmEwYTpmMjgwOjovMzIiXSwiQmxvY2tTaXRlcyI6W10sIkJsb2NrSXAiOltdfQ==
 ```
 
 ### Option B — via clipboard
@@ -131,6 +131,32 @@ Added explicitly — services the registry lacks, or ones you want visible:
 - `geosite:cloudflare` — Cloudflare-hosted sites do break in Russia, but it is a CDN: the rule would push every Russian site behind Cloudflare through the VPN. Add it as one line if you need it and check the speed;
 - `geoip:blacklist-ru` — the IP list of blocked networks (requires `Geoipurl` pointing at `geoip-lite.dat`). It catches IP-level blocking, but also drags shared CDN addresses (Google, Cloudflare) into the tunnel even though they are not blocked — with `GlobalProxy: false` that is wasted loss.
 
+## TUN on macOS: the manual steps
+
+In build 3.9.1 TUN comes up, but neither of the two required things is done for you. Verified on macOS: without them the tunnel says "connected" while blocked sites fail.
+
+1. **Point the system at the tunnel's DNS.** The app never installs a resolver, so macOS asks the router, and the router returns nothing for blocked domains (`Could not resolve host` in curl). Check that there is no interception: `scutil --dns | grep 198.18.0.2` — empty. Fix with one command (needs a password):
+
+   ```
+   sudo networksetup -setdnsservers Wi-Fi 198.18.0.2 192.168.0.1
+   ```
+
+   The second address is the router, used as a fallback. Revert with `sudo networksetup -setdnsservers Wi-Fi Empty`. After that `youtube.com` loads through the tunnel (measured: 200 in 0.5 s) while banks and government portals keep going direct.
+
+2. **If your server is addressed by a domain and TUN never opens a connection** — add the server's domain to `DirectSites` so the core resolves it directly instead of through the tunnel. This works around the bug in the [INCY tracker](https://feedback.incy.cc): in TUN the system DNS becomes `198.18.0.2`, the core resolves its own server domain through it → remote DoH via the proxy → the proxy cannot connect yet → deadlock. Example line:
+
+   ```json
+   "DirectSites": ["geosite:private", "domain:your-server.example"]
+   ```
+
+3. **`FakeDNS: true` in the profile is required.** It lets the core synthesise addresses for proxied domains instead of depending on system DNS. With `false` a request to a blocked domain is rejected in microseconds, before any network I/O.
+
+What stays broken and is expected:
+
+- **Rutracker** may not open even through the VPN — the site blocks foreign IPs itself;
+- **Russian government portals** fail in `curl` on the certificate chain (the Russian root CA is not in curl's store) — browsers open them fine;
+- the app's warning "DNS interception may break sites" does not apply here: the core returns correct answers.
+
 ## Telegram: why calls don't work
 
 A call is a separate transport: the Telegram server returns `PhoneConnection` entries with concrete **IP:port** (UDP), and with P2P the client tries to reach the peer's device directly. That traffic has no domain — `ProxySites` never routes it, only `ProxyIp` does.
@@ -172,14 +198,14 @@ To tell profile from tunnel: open `incy://routing/off` (everything into the tunn
  "RemoteDNSIP": "1.1.1.1",
  "DomesticDNSType": "DoU",
  "DomesticDNSDomain": "",
- "DomesticDNSIP": "77.88.8.8",
+ "DomesticDNSIP": "8.8.8.8",
  "DnsHosts": {
   "cloudflare-dns.com": "1.1.1.1"
  },
  "Geositeurl": "https://github.com/XTLS/Xray-rules-dat/releases/latest/download/geosite.dat",
- "FakeDNS": "false",
+ "FakeDNS": "true",
  "DomainStrategy": "IPIfNonMatch",
- "LastUpdated": "1794673800",
+ "LastUpdated": "1794676800",
  "DirectSites": [
   "geosite:private"
  ],
